@@ -1,0 +1,21 @@
+<h1>Temps</h1>
+<p>The lastest reading:</p>
+<%= @latest_reading.temp %>
+
+<%= will_paginate @readings %>
+<table>
+  <tr>
+    <th>Sensor</th>
+    <th>Temperature</th>
+    <th>Date & Time</th>
+  </tr>
+
+  <% @readings.each do |reading| %>
+    <tr>
+      <td><%= reading.sensor_id %></td>
+      <td><%= reading.temp %></td>
+      <td><%= reading.date_time %></td>
+    </tr>
+  <% end %>
+
+</table>
