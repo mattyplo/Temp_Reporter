@@ -20,8 +20,8 @@ default: &default
 development:
   <<: *default
   database: temp_sensor
-  username: mattyplo
-  password: Masmatt#7
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   host: mysql.mattyplo.com
 
 
@@ -54,6 +54,6 @@ test:
 production:
   <<: *default
   database: temp_sensor
-  username: mattyplo
-  password: Masmatt#7
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   host: mysql.mattyplo.com

@@ -1,13 +1,20 @@
 <h1>Temps</h1>
+<h2>Pick a date</h2>
+<form>
+  <%= javascript_pack_tag 'months_selected' %>
+  <%= form_with do |form| %>
+    
+  <% end %>
+</form>
+
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
-
 <%= will_paginate @readings %>
-<table>
+<table class="table table-light table-striped">
   <tr>
-    <th>Sensor</th>
-    <th>Temperature</th>
-    <th>Date & Time</th>
+    <th scope="col">Sensor</th>
+    <th scope="col">Temperature</th>
+    <th scope="col">Date & Time</th>
   </tr>
 
   <% @readings.each do |reading| %>
