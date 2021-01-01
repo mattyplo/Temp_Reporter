@@ -1,11 +1,9 @@
 <h1>Temps</h1>
 <h2>Pick a date</h2>
-<form>
-  <%= javascript_pack_tag 'months_selected' %>
-  <%= form_with do |form| %>
-    
-  <% end %>
-</form>
+
+<%= form_with do |form| %>
+  <%= form.date_field :born_on, min: @min_date, max: @max_date %>
+<% end %>
 
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
