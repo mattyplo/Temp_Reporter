@@ -1,13 +1,16 @@
 <h1>Temps</h1>
 <h2>Pick a date</h2>
 
-<%= form_with do |form| %>
-  <%= form.date_field :born_on, min: @min_date, max: @max_date %>
+<%= form_with url: :temps, method: :get, local: true do |form| %>
+  <%= form.date_field :date_selected, min: @min_date, max: @max_date %>
+  <%= form.submit "Get Temps" %>
 <% end %>
+
 
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
 <%= will_paginate @readings %>
+
 <table class="table table-light table-striped">
   <tr>
     <th scope="col">Sensor</th>
