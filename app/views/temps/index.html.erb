@@ -6,6 +6,7 @@
   <%= form.submit "Get Temps" %>
 <% end %>
 
+<%= area_chart @readings.group_by_minute(:date_time).maximum(:temp) %>
 
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
