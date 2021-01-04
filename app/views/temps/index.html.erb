@@ -7,7 +7,7 @@
 <% end %>
 
 <%= area_chart @readings.group_by_minute(:date_time, n: 15).maximum(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
-
+<%= line_chart @readings.group_by_hour(:date_time).average(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
 <%= will_paginate @readings %>
