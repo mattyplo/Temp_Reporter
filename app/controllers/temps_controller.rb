@@ -9,9 +9,16 @@ class TempsController < ApplicationController
     @latest_reading = SensorReading.last
     if @date_selected != nil
       @readings = SensorReading.where(:date_time => @date_selected.to_date.beginning_of_day..@date_selected.to_date.end_of_day).paginate(page: params[:page], per_page: 96).order('date_time DESC')
+      @min_temp = @readings.last(240).min_by(&:temp).temp
+      @max_temp = @readings.last(240).max_by(&:temp).temp 
       # byebug
+      # @graph_readings = SensorReading.where(:date_time => @date_selected.to_date.beginning_of_day..@date_selected.to_date.end_of_day).paginate(page: params[:page], per_page: 96).order('date_time DESC')
     else
       @readings = SensorReading.paginate(page: params[:page], per_page: 30).order('date_time DESC')
+      @min_temp = SensorReading.last(240).min_by(&:temp).temp
+      @max_temp = SensorReading.last(240).max_by(&:temp).temp 
+      # graph_readings = SensorReading.where(:date_time => @date_selected.to_date.beginning_of_day..@date_selected.to_date.end_of_day).paginate(page: params[:page], per_page: 96).order('date_time DESC')
+      # @graph_readings = SensorReading.all
     end
     # byebug
   end
