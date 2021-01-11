@@ -6,6 +6,7 @@ class TempsController < ApplicationController
     #  get the oldest date on record
     # byebug
     uri = URI('https://api.weather.gov/points/47.6062,-122.3321')
+    #  seatac endpoint - https://api.weather.gov/stations/KSEA/observations/latest
     seattleTemp = Net::HTTP.get(uri)
     @min_date = SensorReading.order("date_time").limit(1)[0].date_time
     @max_date = DateTime.now
