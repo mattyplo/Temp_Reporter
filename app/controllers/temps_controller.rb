@@ -24,6 +24,6 @@ class TempsController < ApplicationController
       @min_temp = SensorReading.last(240).min_by(&:temp).temp - 0.1
       @max_temp = SensorReading.last(240).max_by(&:temp).temp + 0.1
     end
-    byebug
+    # byebug
   end
 end
