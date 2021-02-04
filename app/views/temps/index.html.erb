@@ -9,8 +9,7 @@
 <%= link_to 'Current Temps', root_path %>
 
 <% #thirty points horizontally %>
-<%= area_chart @readings.group_by_minute(:date_time, n: 120).maximum(:temp), min: @min_temp, max: @max_temp %>
-<%= line_chart @readings.group_by_hour(:date_time).average(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
+<%= area_chart @readings.group_by_minute(:date_time, n:120).average(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
 <p>The lastest reading:</p>
 <%= @latest_reading.temp %>
 <p>The latest reading at SeaTac:</p>
