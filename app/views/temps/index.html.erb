@@ -1,11 +1,10 @@
 <div class="container">
   <h1 class="text-center my-3">Temperature of a certain location</h1>
-
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 text-center">
       <p>The lastest reading at this location: <%= @latest_reading.temp %></p>
     </div>
-    <div class="col-6">      
+    <div class="col-6 text-center">      
       <p>The latest reading at SeaTac:   <%= @seatacTemp %></p>
     </div>
   </div>
@@ -17,12 +16,22 @@
     </div>
   </div>
 
-  <h2>Pick a date</h2>
-  <%= form_with url: :temps, method: :get, local: true do |form| %>
-    <%= form.date_field :date_selected, min: @min_date, max: @max_date %>
-    <%= form.submit "Get Temps" %>
-  <% end %>
-  <%= link_to 'Current Temps', root_path %>
+  <div class="container">
+    <%= form_with url: :temps, method: :get, local: true do |form| %>
+      <div class="d-flex justify-content-center">
+        <h2>Pick a date</h2>
+      </div>
+      <div class="d-flex justify-content-center p-2">
+        <%= form.date_field :date_selected, min: @min_date, max: @max_date %>
+      </div>
+      <div class="d-flex justify-content-center p-2">
+        <%= form.submit "Get Temps", class: "btn-sm btn-primary mr-2" %>
+        <button class="btn-sm btn-primary ml-2">
+          <%= link_to 'Current Temps', root_path, class: "text-white" %>
+        </button>
+      </div>
+    <% end %>
+  </div>
 
   <%= will_paginate @readings %>
 
