@@ -1,34 +1,45 @@
-<h1>Temps</h1>
-<h2>Pick a date</h2>
+<div class="container">
+  <h1 class="text-center my-3">Temperature of a certain location</h1>
 
-<%= form_with url: :temps, method: :get, local: true do |form| %>
-  <%= form.date_field :date_selected, min: @min_date, max: @max_date %>
-  <%= form.submit "Get Temps" %>
-<% end %>
+  <div class="row">
+    <div class="col-6">
+      <p>The lastest reading at this location: <%= @latest_reading.temp %></p>
+    </div>
+    <div class="col-6">      
+      <p>The latest reading at SeaTac:   <%= @seatacTemp %></p>
+    </div>
+  </div>
 
-<%= link_to 'Current Temps', root_path %>
+  <div class="jumbotron">
+    <div class="container">
+      <% #thirty points horizontally %>
+      <%= area_chart @readings.group_by_minute(:date_time, n:120).average(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
+    </div>
+  </div>
 
-<% #thirty points horizontally %>
-<%= area_chart @readings.group_by_minute(:date_time, n:120).average(:temp), min: @readings.minimum("temp"), max: @readings.maximum("temp") %>
-<p>The lastest reading:</p>
-<%= @latest_reading.temp %>
-<p>The latest reading at SeaTac:</p>
-<%= @seatacTemp %>
-<%= will_paginate @readings %>
-
-<table class="table table-light table-striped">
-  <tr>
-    <th scope="col">Sensor</th>
-    <th scope="col">Temperature</th>
-    <th scope="col">Date & Time</th>
-  </tr>
-
-  <% @readings.each do |reading| %>
-    <tr>
-      <td><%= reading.sensor_id %></td>
-      <td><%= reading.temp %></td>
-      <td><%= reading.date_time %></td>
-    </tr>
+  <h2>Pick a date</h2>
+  <%= form_with url: :temps, method: :get, local: true do |form| %>
+    <%= form.date_field :date_selected, min: @min_date, max: @max_date %>
+    <%= form.submit "Get Temps" %>
   <% end %>
+  <%= link_to 'Current Temps', root_path %>
 
-</table>
+  <%= will_paginate @readings %>
+
+  <table class="table table-light table-striped">
+    <tr>
+      <th scope="col">Sensor</th>
+      <th scope="col">Temperature</th>
+      <th scope="col">Date & Time</th>
+    </tr>
+
+    <% @readings.each do |reading| %>
+      <tr>
+        <td><%= reading.sensor_id %></td>
+        <td><%= reading.temp %></td>
+        <td><%= reading.date_time %></td>
+      </tr>
+    <% end %>
+
+  </table>
+</div>
